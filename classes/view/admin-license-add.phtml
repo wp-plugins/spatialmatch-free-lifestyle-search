@@ -1,0 +1,78 @@
+<div class='wrap'>
+
+    <div class='keyicon icon32'><br/></div>
+
+    <h2 style='padding-bottom:10px'>Add License Key</h2>
+
+    <?php require('common/messages.phtml') ?>
+
+    <p />
+    
+    <form method='post'>
+        
+        <input type='hidden' name='action' value='commit-license' />
+        
+        <?php wp_nonce_field(); ?>
+
+        <div id='poststuff' style='width:600px'>
+    
+            <div class='stuffbox'>
+                <h3><label for='spatialmatch-license-key'>Enter License Key</label></h3>
+    
+                <div class='inside'>
+                    <input id='spatialmatch-license-key' name='spatialmatch-license-key' type='text' style='width:100%;margin-bottom:10px'
+                           value='<?php echo esc_html($this->view->licenseKey) ?>' />
+                                             
+                    <div id='spatialmatch-bogus-license' style='color:red'>
+                        Please enter a valid SpatialMatch&reg; license key.
+                    </div>
+                    
+                    <div id='spatialmatch-valid-license' style='display:none;color:green'>
+                        Your license key appears to be valid.
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+    
+        <input class='button-primary' type='submit' value='OK' style='width:100px' />
+        
+        <a href='<?php echo admin_url('admin.php?page=' . self::MENU_ID . '-licenses')?>' style='text-decoration:none'>        
+            <input class='button-secondary' type='button' value='Cancel' style='width:100px' />
+        </a>
+        
+    </form>
+    
+    <script type='text/javascript'>
+        jQuery(document).ready(function ()
+        {
+            var obj = jQuery('#spatialmatch-license-key');
+            
+            if (obj !== null)
+            {
+                obj.change(function ()
+                {
+                    spatialmatch_check_license_key();
+                });
+                
+                obj.keyup(function ()
+                {
+                    spatialmatch_check_license_key();   
+                })
+            }
+            
+            spatialmatch_check_license_key();
+        });
+        
+        spatialmatch_check_license_key = function ()
+        {
+            var value = jQuery('#spatialmatch-license-key').val();
+    
+            var b = SpatialMatch.Admin.isLicenseKeyValid(value);
+                    
+            jQuery('#spatialmatch-bogus-license')[(b == true) ? 'hide' : 'show']();
+            jQuery('#spatialmatch-valid-license')[(b == true) ? 'show' : 'hide']();                    
+        }
+    </script>
+    
+</div>

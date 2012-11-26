@@ -1,0 +1,348 @@
+<?php
+    require_once(SpatialMatch::$pluginDir . '/classes/util/CSS.php');
+
+    $widget = $this->view->widget;
+    $instance = $this->view->instance;
+    
+    $fields = isset($instance['fields']) ? $instance['fields'] : array();
+
+    $RESIDENTIAL = SpatialMatch_Widget_PropertySearch::LISTING_TYPE_RESIDENTIAL;
+    $LAND = SpatialMatch_Widget_PropertySearch::LISTING_TYPE_LAND;
+    $MULTIFAMILY = SpatialMatch_Widget_PropertySearch::LISTING_TYPE_MULTIFAMILY;
+    $RENTALS = SpatialMatch_Widget_PropertySearch::LISTING_TYPE_RENTALS;
+    $FARMS = SpatialMatch_Widget_PropertySearch::LISTING_TYPE_FARMS;
+    
+    $listingType = $instance['listingType'];
+
+    $VERTICAL = SpatialMatch_Widget_PropertySearch::ORIENTATION_VERTICAL;
+    $HORIZONTAL = SpatialMatch_Widget_PropertySearch::ORIENTATION_HORIZONTAL;
+        
+    $orientation = $instance['orientation'];
+    
+    $POPUP = SpatialMatch_Widget_PropertySearch::TARGET_POPUP;
+    $PAGE = SpatialMatch_Widget_PropertySearch::TARGET_PAGE;
+    
+    $target = $instance['target'];
+
+    if ($widget->updated == true)
+    {
+        $s = isset($instance['location']) ? trim($instance['location']) : null;
+
+        if (empty($s))
+        {
+?>            
+            <div class='error'><p style='margin:.5em 0'>Please specify a default location.</p></div>
+<?php        
+        }
+        
+        if (isset($target) && ($target == $PAGE))
+        {
+            $s = isset($instance['page_url']) ? trim($instance['page_url']) : null;
+
+            if (empty($s))
+            {
+?>            
+                <div class='error'><p style='margin:.5em 0'>Please specify a search page URL.</p></div>
+<?php        
+            }        
+        }
+    }
+    
+?>
+
+<div class='spatialmatch-search-form'>
+
+<!-- License Key -->
+
+<?php    
+    $currentKey = isset($instance['license_key']) ? trim($instance['license_key']) : '';
+
+    $availableKeys = array();
+        
+    $match = false;
+        
+    foreach ($this->view->licenseKeys as $licenseKey)
+    {
+        if ($licenseKey == $currentKey)
+        {
+            $match = true;
+        }
+        
+        array_push($availableKeys, $licenseKey);
+    }
+        
+    if ($match == false)
+    {
+        if (!empty($currentKey))
+        {
+            array_unshift($availableKeys, $currentKey);
+        }
+        else
+        {
+            if (count($availableKeys) > 0)
+            {
+                $currentKey = $availableKeys[0];
+            }
+        }
+    }
+
+    if (count($availableKeys) > 1)
+    {
+?>
+        <p>
+            License Key:
+        
+            <select name='<?php echo $widget->get_field_name('license_key') ?>'
+                id='<?php echo $widget->get_field_id('license_key') ?>' style='width:100%;margin-top:5px'>
+<?php
+                foreach ($availableKeys as $licenseKey)
+                {
+                    $match = ($licenseKey == $currentKey) ? true : false;
+?>
+                    <option value='<?php echo $licenseKey ?>' <?php selected($match) ?>><?php echo $licenseKey ?></option>
+<?php
+                }
+?>
+            </select>
+
+        </p>
+<?php
+    }
+    else
+    {
+?>
+        <input type='hidden' name='<?php echo $widget->get_field_name('license_key') ?>' value='<?php echo $currentKey ?>' />
+<?php
+    }
+?>
+
+<!-- Title -->
+
+    <p>
+        <label for='<?php echo $widget->get_field_id('title') ?>'>Title:</label>
+        
+        <input type='text' class='widefat'
+            id='<?php echo $widget->get_field_id('title') ?>' name='<?php echo $widget->get_field_name('title') ?>'
+            value='<?php echo esc_html($instance['title']) ?>' placeholder='Optional' />
+    
+    </p>
+
+<!-- Listing Type -->
+
+    <p>
+        What kind of property do you want to search for?
+
+        <select name='<?php echo $widget->get_field_name('listingType') ?>'
+            id='<?php echo $widget->get_field_id('listingType') ?>' style='width:100%;margin-top:5px;margin-bottom:5px'
+                onchange='SpatialMatch.Admin.Widget.listingTypeChangeHandler(this)'>
+            
+            <option value='<?php echo $RESIDENTIAL ?>' <?php selected($listingType == $RESIDENTIAL) ?>>Residential</option>                
+            <option value='<?php echo $LAND ?>' <?php selected($listingType == $LAND) ?>>Lots &amp; Land</option>            
+            <option value='<?php echo $MULTIFAMILY ?>' <?php selected($listingType == $MULTIFAMILY) ?>>Multifamily</option>            
+            <option value='<?php echo $RENTALS ?>' <?php selected($listingType == $RENTALS) ?>>Rentals</option>            
+            <option value='<?php echo $FARMS ?>' <?php selected($listingType == $FARMS) ?>>Farms</option>
+            
+        </select>
+        
+        <span class='description'>(not all property types are available in every market)</span>        
+    </p>
+
+<!-- Fields -->
+
+    <fieldset>
+    
+        <legend>Select the fields you want to display:</legend>
+    
+        <div>
+
+            <ul>
+<?php
+                for ($ii = 0; $ii < count(SpatialMatch_Widget_PropertySearch::$FIELDS); $ii++)
+                {
+                    $field = SpatialMatch_Widget_PropertySearch::$FIELDS[$ii];
+                    
+                    $idx = $widget->get_field_id('fields') . '-' . $field['key'];
+                    
+                    $visible = (in_array($listingType, $field['types']) || in_array('*', $field['types'])) ? true : false;
+?>
+                    <li listingTypes='<?php echo implode(',', $field['types']) ?>'
+                        style='display:<?php echo ($visible == true) ? 'block' : 'none' ?>'>
+                                        
+                        <input class='checkbox' type='checkbox' id='<?php echo $idx ?>'
+                            <?php echo SpatialMatch_Util_CSS::checked(in_array($field['key'], $fields)) ?>
+                                 name='<?php echo $widget->get_field_name('fields') ?>[]' value='<?php echo $field['key'] ?>' />
+                                 
+                        <label for='<?php echo $idx ?>'><?php echo $field['label'] ?></label><br />
+                    </li>
+<?php
+                }
+?>                
+            </ul>
+
+        </div>
+
+    </fieldset>
+
+    <p />
+
+<!-- Location -->
+
+    <p>
+            
+        <label for='<?php echo $widget->get_field_id('location') ?>'>Default Location</label> <span class='description'>(required)</span>
+    
+        <input type='text' class='widefat'
+            id='<?php echo $widget->get_field_id('location') ?>' name='<?php echo $widget->get_field_name('location') ?>'
+            value='<?php echo esc_html($instance['location']) ?>' placeholder='City, State or Zip' />
+    
+    </p>
+    
+<!-- Zoom Level -->
+
+    <p>
+        
+        <label for='<?php echo $widget->get_field_id('zoom') ?>'>Map Zoom Level</label> <span class='description'>(optional)</span>
+    
+        <input type='text' class='widefat'
+            id='<?php echo $widget->get_field_id('zoom') ?>' name='<?php echo $widget->get_field_name('zoom') ?>'
+            value='<?php echo esc_html($instance['zoom']) ?>' placeholder='11 thru 17' />
+    
+    </p>
+
+<!-- Target  -->
+
+    <div>
+        <label>Where do you want to display the results when the user runs this search?</label>
+    </div>
+        
+    <select name='<?php echo $widget->get_field_name('target') ?>'
+        id='<?php echo $widget->get_field_id('target') ?>' style='width:100%;margin-top:10px;margin-bottom:5px'
+            onchange='SpatialMatch.Admin.Widget.targetChangeHandler(this)'>
+        
+        <option value='<?php echo $POPUP ?>' <?php selected($target == $POPUP) ?>>Popup Window</option>
+        <option value='<?php echo $PAGE ?>' <?php selected($target == $PAGE) ?>>Page</option>
+        
+    </select>                
+
+<!-- Popup Settings -->
+
+    <div id='<?php echo $widget->get_field_id('target') ?>-<?php echo $POPUP ?>'
+        style='display:<?php echo ($target == $POPUP) ? 'block' : 'none' ?>'>
+    
+        <table style='width:100%'>
+        
+            <tr>
+                <td>
+                    <label for='<?php echo $widget->get_field_id('popup_width') ?>'>Popup&nbsp;Width:</label>
+                </td>
+                
+                <td>        
+                    <input type='text' class='widefat' style='width:45px'
+                        id='<?php echo $widget->get_field_id('popup_width') ?>' name='<?php echo $widget->get_field_name('popup_width') ?>'
+                        value='<?php echo esc_html($instance['popup_width']) ?>' />
+                </td>
+                
+                <td>(pixels&nbsp;or&nbsp;%)</td>
+            </tr>
+                    
+            <tr>
+                <td>
+                    <label for='<?php echo $widget->get_field_id('popup_height') ?>'>Popup&nbsp;Height:</label>
+                </td>
+        
+                <td>
+                    <input type='text' class='widefat' style='width:45px'
+                        id='<?php echo $widget->get_field_id('popup_height') ?>' name='<?php echo $widget->get_field_name('popup_height') ?>'
+                        value='<?php echo esc_html($instance['popup_height']) ?>' />
+                </td>
+                
+                <td>(pixels)</td>
+            </tr>
+            
+            <tr>
+                <td colspan='3'><p class='description' style='margin:.5em 0px 0px 0px'>If you leave the sizes blank, the popup will fill the entire browser window.</p></td>
+            </tr>
+            
+        </table>
+        
+    </div>
+
+<!-- Page Settings -->
+
+    <div id='<?php echo $widget->get_field_id('target') ?>-<?php echo $PAGE ?>'
+        style='display:<?php echo ($target == $PAGE) ? 'block' : 'none' ?>'>
+
+        <p style='padding-top:5px'>     
+            <label for='<?php echo $widget->get_field_id('page_url') ?>' style='display:block;margin-bottom:5px'>
+                Specify the URL of the page that will process the search request:
+            </label>
+        
+            <input type='text' class='widefat'
+                id='<?php echo $widget->get_field_id('page_url') ?>' name='<?php echo $widget->get_field_name('page_url') ?>'
+                    value='<?php echo esc_html($instance['page_url']) ?>' />
+    
+            <span class='description' style='display:block;margin-top:5px'>
+                You can use the <code>[spatialmatch_map]</code> shortcode on the specified page to automatically display the search results in a SpatialMatch&reg; map.
+            </span>
+        </p>
+
+    </div>
+
+    <p />
+
+<!-- Orientation -->
+
+    <div>
+        <label>How would you like to orient this widget?</label>
+    </div>
+    
+    <select name='<?php echo $widget->get_field_name('orientation') ?>'
+        id='<?php echo $widget->get_field_id('orientation') ?>' style='width:100%;margin-top:10px;margin-bottom:5px'
+        onchange='SpatialMatch.Admin.Widget.orientationChangeHandler(this)'>
+            
+        <option value='<?php echo $VERTICAL ?>' <?php selected($orientation == $VERTICAL) ?>>Vertical Orientation</option>
+        <option value='<?php echo $HORIZONTAL ?>' <?php selected($orientation == $HORIZONTAL) ?>>Horizontal Orientation</option>
+            
+    </select>                
+
+    <div id='<?php echo $widget->get_field_id('orientation') ?>-<?php echo $HORIZONTAL ?>'
+        style='display:<?php echo ($orientation == $HORIZONTAL) ? 'block' : 'none' ?>'>
+
+        <table style='width:100%'>
+        
+            <tr>
+                <td>
+                    <label for='<?php echo $widget->get_field_id('column_width') ?>'>Column Width:</label>
+                </td>
+                
+                <td>
+                    <input type='text' class='widefat' id='<?php echo $widget->get_field_id('column_width') ?>' style='width:50px'
+                        name='<?php echo $widget->get_field_name('column_width') ?>' value='<?php echo esc_html($instance['column_width']) ?>' />
+                </td>
+                
+                <td>
+                    <span class='description'>(pixels&nbsp;or&nbsp;%)</span>
+                </td>
+                
+            </tr>
+            
+            <tr>
+                <td>
+                    <label for='<?php echo $widget->get_field_id('column_count') ?>'># Columns:</label>
+                </td>
+                
+                <td>
+                    <input type='text' class='widefat' id='<?php echo $widget->get_field_id('column_count') ?>' style='width:50px'
+                        name='<?php echo $widget->get_field_name('column_count') ?>' value='<?php echo esc_html($instance['column_count']) ?>' />
+                </td>
+                
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+            
+        </table>
+
+    </div>
+
+</div>

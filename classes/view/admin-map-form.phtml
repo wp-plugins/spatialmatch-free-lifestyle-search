@@ -1,0 +1,254 @@
+<div id='poststuff' class='metabox-holder has-right-sidebar'>
+
+    <div id='post-body'>
+        
+        <div id='post-body-content'>
+
+<!-- License Keys -->
+
+<?php
+            $availableKeys = array();
+            
+            $currentKey = null;
+            
+            foreach ($this->view->licenseKeys as $licenseKey)
+            {
+                $match = ($licenseKey == $this->view->map->licenseKey) ? true : false;
+
+                if ($match == true)
+                {
+                    $currentKey = $licenseKey;
+                }
+                
+                array_push($availableKeys, $licenseKey);
+            }
+            
+            if ($currentKey == null)
+            {
+                if (!empty($this->view->map->licenseKey))
+                {
+                    $currentKey = $this->view->map->licenseKey;
+                
+                    array_unshift($availableKeys, $currentKey);
+                }
+                else
+                {
+                    if (count($availableKeys) > 0)
+                    {
+                        $currentKey = $availableKeys[0];
+                    }
+                }
+            }
+            
+            if (count($availableKeys) > 1)
+            {
+?>                
+                <div class='stuffbox'>
+                
+                    <h3>
+                        <label for='spatialmatch-map-license-key'>License Key</label>
+                    </h3>                        
+
+                    <div class='inside'>
+
+                        <select id='spatialmatch-map-license-key' name='spatialmatch-map-license-key' style='width:100%'>
+<?php
+                            foreach ($availableKeys as $licenseKey)
+                            {
+                                $match = ($licenseKey == $currentKey) ? true : false;
+?>
+                                <option value='<?php echo $licenseKey ?>' <?php selected($match) ?>><?php echo $licenseKey ?></option>
+<?php
+                            }
+?>
+                        </select>
+
+                        <p />
+                    
+                        <p class='description'>If you select a different license key, the SpatialMatch&reg; map below will be reloaded and all
+                            of your current customizations will be lost.   As such, please <strong>select the license key first</strong>.</p>
+
+                    </div>
+
+                </div>
+<?php
+            }
+            else
+            {
+?>
+                <input type='hidden' name='spatialmatch-map-license-key' value='<?php echo $currentKey ?>' />
+<?php
+            }
+?>            
+                        
+<!-- Title -->
+
+            <div class='stuffbox'>
+                
+                <h3>
+                    <label for='spatialmatch-map-title'>Title</label>
+                </h3>                        
+
+                <div class='inside'>
+                    <input id='spatialmatch-map-title' name='spatialmatch-map-title' type='text' style='width:100%'
+                       value='<?php echo esc_html($this->view->map->title) ?>' />
+
+                    <p>Example: Homes for Sale in San Diego</p>
+
+                </div>
+
+            </div>                        
+
+<!-- Settings -->
+  
+            <div class='stuffbox'>
+                
+                <h3>
+                    <label>Settings</label>
+                </h3>
+
+                <div class='inside'>
+
+                    <p>Specify how you want the map to be displayed when it is displayed on your site.</p>
+                        
+                    <div id='spatialmatch-map-wrapper'></div>
+
+                    <input type='hidden' id='spatialmatch-map-bookmark' name='spatialmatch-map-bookmark'
+                           value='<?php echo addslashes($this->view->map->bookmark) ?>' />
+                    
+                </div>
+                
+            </div>
+            
+<!-- Advanced -->
+
+            <div class='stuffbox'>
+                
+                <h3>
+                    <label>Advanced</label>
+                </h3>
+                
+                <div class='inside'>
+                    
+                    <table class='form-table' cellspacing='2' cellpadding='5'>
+                        <tbody>
+                            
+                            <tr class='form-field'>
+                                <th valign='top' scope='row'>
+                                    <label for='spatialmatch-map-description'>Description</label>
+                                </th>
+                            
+                                <td>
+                                    <input id='spatialmatch-map-description' name='spatialmatch-map-description' type='text' style='width:100%'
+                                        value='<?php echo esc_html($this->view->map->description) ?>' />
+
+                                    <p>This optional description is for your personal use and will not be shown to your readers.</p>
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                    
+                </div>
+
+            </div>
+            
+        </div>
+                
+        <p class='submit'>
+            <input id='submit' class='button-primary' type='submit' value='Save Changes' name='submit' />
+        </p>                
+
+    </div>
+                
+    <script type='text/javascript'>
+        jQuery(document).ready(function ()
+        {
+            var bookmark = jQuery('#spatialmatch-map-bookmark');
+            
+            var form = bookmark.parents('form:first');
+            
+            if (form == null)
+            {
+                throw('An unexpected error has occurred: Unable to find form.');
+            }
+            
+            form.submit(function ()
+            {
+                var value = '';
+                
+                var sm = document.getElementById(__theEmbeddedMapId);
+                
+                if ((sm != null) && (sm.getBookmark != null))
+                {                    
+                    var tokens = sm.getBookmark().split('?')[1].split('#')[0].split('&');
+                    
+                    for (var ii = 0; ii < tokens.length; ii++)
+                    {
+                        var kv = tokens[ii].split('=');
+
+                        // Kludge to drop WordPress parameters
+                        
+                        if ((kv[0] == 'settings-updated') || (kv[0] == 'page'))
+                        {
+                            continue;
+                        }
+                        
+                        if (value.length > 0)
+                        {
+                            value += ';';
+                        }
+                        
+                        value += jQuery.trim(tokens[ii]);
+                    }                           
+                }
+                
+                if ((value != null) && (value.length > 0))
+                {
+                    bookmark.val(value);
+                }
+                else
+                {
+                    alert('Unable to get the settings data from the map.\nPlease wait for the map to load and try again.');
+                    
+                    return false;
+                }
+            });
+            
+            var licensebox = jQuery('#spatialmatch-map-license-key');
+            
+            if ((licensebox != null) && (licensebox.length > 0))
+            {
+                licensebox.change(function ()
+                {
+                    var newLicenseKey = licensebox.val();
+
+                    SpatialMatch.Admin.__loadEditableMap(newLicenseKey);
+                });
+            }
+            
+            SpatialMatch.Admin.__loadEditableMap('<?php echo $currentKey ?>');
+        });
+        
+        SpatialMatch.Admin.__loadEditableMap = function(licenseKey)
+        {
+            var wrapper = jQuery('#spatialmatch-map-wrapper');
+             
+            wrapper.empty();
+            
+            var targetId = 'sm-target-' + SpatialMatch.Util.uid();
+
+            wrapper.append('<div id="' + targetId + '"></div>');
+                                             
+            __theEmbeddedMapId = SpatialMatch.Map.embed(
+            {
+                licenseKey: licenseKey,
+                bookmark: '<?php echo $this->view->map->bookmark ?>',
+                renderTo: targetId,
+                width: '100%',
+                height: 600
+            });
+        }
+    </script>
+
+</div>
