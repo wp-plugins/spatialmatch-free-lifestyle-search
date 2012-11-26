@@ -2,7 +2,6 @@
 Tags: IDX, MLS, Multiple Listing Service, Real Estate, Wordpress IDX, search, map, lifestyle, neighborhood, schools, demographics, homes, data
 Requires at least: 3.3
 Tested up to: 3.4
-Stable tag: 2.5
 
 Compete with the Big Portals! Capture leads with unlimited search maps using 100 integrated databases. Real-time interactive interface. Excellent SEO. 
 
