@@ -1,0 +1,134 @@
+<?php
+    require_once(SpatialMatch::$pluginDir . '/classes/util/String.php');
+
+    $widget = $this->view->widget;
+    $instance = $this->view->instance;
+    
+    if (count($this->view->maps) > 0)
+    {
+        if ($widget->updated == true)
+        {
+            if (isset($instance['appearance']) && ($instance['appearance'] == 'image'))
+            {
+                $s = isset($instance['text']) ? trim($instance['text']) : null;
+
+                if (empty($s))
+                {
+?>            
+                    <div class='error'><p style='margin:.5em 0'>Please specify an image URL.</p></div>
+<?php        
+                }        
+            }
+        }
+?>
+        <p>
+            
+            <label for='<?php echo $widget->get_field_id('map') ?>'>Select the map that you want to popup:</label>
+            
+            <select name='<?php echo $widget->get_field_name('map') ?>'
+                    id='<?php echo $widget->get_field_id('map') ?>' style='width:100%;margin-top:5px'>
+<?php
+                $foundIt = false;
+                    
+                foreach ($this->view->maps as $map)
+                {
+                    $selected = ($instance['map'] == $map->id) ? true : false;
+                        
+                    if ($selected == true)
+                    {
+                        $foundIt = true;
+                    }
+?>
+                    <option value='<?php echo $map->id; ?>' <?php if ($selected) echo 'selected="selected"' ?>
+                        ><?php echo SpatialMatch_Util_String::truncate($map->title, 50) ?></option>
+<?php
+                }
+                    
+                if (($foundIt == false) && (isset($instance['map'])))
+                {
+?>
+                    <option value='0' selected='selected'></option>
+<?php
+                }
+?>                    
+            </select>
+<?php                    
+            if (($foundIt == false) && (isset($instance['map'])))
+            {
+?>
+                <span class='warning'>Please select a valid map.</span>
+<?php                        
+            }
+?>
+        </p>                    
+
+        <p>
+            The <strong>anchor</strong> is what the user will click on to popup this map. What do you want this anchor to look like?
+            
+            <select name='<?php echo $widget->get_field_name('appearance') ?>'
+                id='<?php echo $widget->get_field_id('appearance') ?>' style='width:100%;margin-top:10px'>
+                
+                <option value='link' <?php selected($instance['appearance'] == 'link') ?>>Standard Web Link</option>
+                <option value='button' <?php selected($instance['appearance'] == 'button') ?>>Button</option>
+                <option value='image' <?php selected($instance['appearance'] == 'image') ?>>Image</option>
+                
+            </select>                
+        </p>
+        
+        <p>
+            <label for='<?php echo $widget->get_field_id('text') ?>'>Anchor Text or Image URL:</label> &nbsp;
+        
+            <input type='text' class='widefat' style='margin-bottom:5px'
+                id='<?php echo $widget->get_field_id('text') ?>' name='<?php echo $widget->get_field_name('text') ?>'
+                value='<?php echo esc_html($instance['text']) ?>' />
+                
+            <br /><span class='description'>Required for an image.   If you leave this blank, the map title will be used as the link or button text.</span>
+        </p>
+
+        <p>
+            <table style='width:100%'>
+            
+                <tr>
+                    <td>
+                        <label for='<?php echo $widget->get_field_id('width') ?>'>Popup&nbsp;Width:</label>
+                    </td>
+                    
+                    <td>        
+                        <input type='text' class='widefat' style='width:45px'
+                            id='<?php echo $widget->get_field_id('width') ?>' name='<?php echo $widget->get_field_name('width') ?>'
+                            value='<?php echo esc_html($instance['width']) ?>' />
+                    </td>
+                    
+                    <td>(pixels&nbsp;or&nbsp;%)</td>
+                </tr>
+                        
+                <tr>
+                    <td>
+                        <label for='<?php echo $widget->get_field_id('height') ?>'>Popup&nbsp;Height:</label>
+                    </td>
+            
+                    <td>
+                        <input type='text' class='widefat' style='width:45px'
+                            id=;<?php echo $widget->get_field_id('height') ?>' name='<?php echo $widget->get_field_name('height') ?>'
+                            value='<?php echo esc_html($instance['height']) ?>' />
+                    </td>
+                    
+                    <td>(pixels)</td>
+                </tr>
+                
+                <tr>
+                    <td colspan='3'><p class='description' style='margin:.5em 0px 0px 0px'>If you leave the sizes blank, the popup will fill the entire browser window.</p></td>
+                </tr>
+                
+            </table>
+            
+        </p>
+<?php  
+    }
+    else
+    {
+?>
+        <p><span class='warning'>You have not created any maps.  <a href='admin.php?page=<?php echo SpatialMatch_Controller_Admin::MENU_ID ?>-add'>Add one now!</a></span></p>
+<?php
+    }
+?>

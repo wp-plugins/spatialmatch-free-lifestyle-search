@@ -1,0 +1,56 @@
+<div class='wrap'>
+
+    <div id='icon-options-general' class='icon32'><br/></div>
+
+    <h2>SpatialMatch&reg; Settings</h2>
+
+    <?php require('common/messages.phtml') ?>
+
+    <p />
+    
+    <form name='spatialmatch-settings-form' class='spatialmatch-settings-form' method='post' action='options.php'>
+    
+        <?php settings_fields(SpatialMatch_Manager_Settings::ID) ?>
+            
+        <h3>Google AdWords <span style='color:#666666;color:font-size:12px;font-style:italic'>(Optional)</span></h3>
+        
+        <p>
+            SpatialMatch&trade; can be integrated with Google AdWords.   Whenever a user signs up on your site, SpatialMatch will track a user conversion.<br />
+            For more information on Google AdWords, please click <a href='http://adwords.google.com' target='_blank'>here</a>.
+        </p>
+        
+        <table>
+                        
+            <tr>
+                <td class='spatialmatch-row-label'>Conversion ID</td>
+
+                <td>
+                    <input type='text' name='<?php echo SpatialMatch_Manager_Settings::ID?>[adwords-conversion-id]' 
+                        value='<?php if (isset($this->view->settings['adwords-conversion-id'])) { echo esc_html(trim($this->view->settings['adwords-conversion-id'])); } ?>' />
+                        
+                    <p />
+                </td>
+            
+            </tr>
+        
+            <tr>
+                <td class='spatialmatch-row-label'>Conversion Label</td>
+
+                <td>
+                    <input type='text' name='<?php echo SpatialMatch_Manager_Settings::ID?>[adwords-conversion-label]' 
+                        value='<?php if (isset($this->view->settings['adwords-conversion-label'])) { echo esc_html(trim($this->view->settings['adwords-conversion-label'])); } ?>' />                    
+
+                    <p />
+                </td>
+            
+            </tr>
+
+        </table>
+        
+        <p />
+        
+        <input type='submit' class='button-primary' value='Save Settings' />   
+        
+    </form>
+    
+</div>

@@ -1,0 +1,26 @@
+<?php
+    $url = SpatialMatch::PLUGIN_NAME . '/classes/view/adwords-iframe.php?id=' .
+        esc_js($conversionId) . '&label=' . esc_js($conversionLabel);
+?>        
+    
+<script type='text/javascript'>
+    if (SpatialMatch != null)
+    {
+        SpatialMatch.AdWords =            
+        {
+            track: function (eventName, data)
+            {
+                var tracking = jQuery('IFRAME#spatialmatch-adwords-tracking');
+                    
+                if ((tracking != null) && (tracking.length > 0))
+                {
+                    var url = '<?php echo plugins_url($url) ?>';
+    
+                    console.log('tracking url: ' + url);
+                    
+                    tracking.attr('src', url);
+                }
+            }
+        };
+    }
+</script>
