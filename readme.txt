@@ -1,4 +1,4 @@
-=== SpatialMatch ===
+=== SpatialMatch Lifestyle Search ===
 Tags: IDX, MLS, Multiple Listing Service, Real Estate, Wordpress IDX, search, map, lifestyle, neighborhood, schools, demographics, homes, data
 Requires at least: 3.3
 Tested up to: 3.4
