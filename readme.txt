@@ -10,9 +10,9 @@ Compete with the Big Portals! Capture leads with unlimited search maps using 100
 
 * SpatialMatch&reg; FREE Lifestyle Search is a revolutionary lifestyle real estate search engine plugin for real estate professionals focusing on the broader lifestyle needs of a potential homeowner.  
 
-* SpatialMatch&reg; FREE Lifestyle Search enables the dream by allowing consumers to search for the particular area(s) that best match the hyper-local factors that impact the style and quality of life (i.e. the consumer “lifestyle”).  
+* SpatialMatch&reg; FREE Lifestyle Search enables the dream by allowing consumers to search for the particular area(s) that best match the hyper-local factors that impact the style and quality of life (i.e. the consumer &quot;lifestyle&quot;).  
 
-* Consumers can search for neighborhoods or communities based upon any combination of parameters relating to demographics, education, points of interest, neighborhoods, and more (i.e. looking for the micro communities in a particular area that are in close proximity to the right high school, favorite coffee shop, place of worship and grocery store(s) is critical to today’s real estate consumer).
+* Consumers can search for neighborhoods or communities based upon any combination of parameters relating to demographics, education, points of interest, neighborhoods, and more (i.e. looking for the micro communities in a particular area that are in close proximity to the right high school, favorite coffee shop, place of worship and grocery store(s) is critical to today's real estate consumer).
 
 * SpatialMatch&reg; FREE Lifestyle Search plugin instantly improves your websites competitiveness.  It delivers a fun, interactive map-based user experience that displays all their selected lifestyle factors.  
 
