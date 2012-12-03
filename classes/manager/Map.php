@@ -26,15 +26,27 @@ class SpatialMatch_Manager_Map
         }
     }
     
-    public static function find()
+    public static function find($options = false)
     {
         global $wpdb;
         
         $tableName = $wpdb->prefix . SpatialMatch_Util_Database::MAP_TABLENAME;
         
-        $query = $wpdb->prepare('SELECT * FROM ' . $tableName);
+        $sql = 'SELECT * FROM ' . $tableName;
+
+        if (!empty($options['keyword']))
+        {
+            $keyword = $wpdb->escape(strtolower($options['keyword']));
+            
+            $sql .= " WHERE (lower(title) like '%" . $keyword . "%' OR lower(description) like '%" . $keyword . "%')";
+        }
         
-        return $wpdb->get_results($query);
+        $sortField = !empty($options['sortField']) ? $options['sortField'] : 'title';
+        $sortOrder = !empty($options['sortOrder']) ? $options['sortOrder'] : 'asc';
+
+        $sql .= ' order by ' . $sortField . ' ' . $sortOrder;
+        
+        return $wpdb->get_results($sql);
     }
     
     public static function create($map)

@@ -7,6 +7,7 @@ require_once(SpatialMatch::$pluginDir . '/classes/manager/LicenseKeys.php');
 require_once(SpatialMatch::$pluginDir . '/classes/manager/Map.php');
 require_once(SpatialMatch::$pluginDir . '/classes/manager/Settings.php');
 require_once(SpatialMatch::$pluginDir . '/classes/model/Map.php');
+require_once(SpatialMatch::$pluginDir . '/classes/ui/MapList.php');
 
 class SpatialMatch_Controller_Admin
 {
@@ -87,33 +88,33 @@ class SpatialMatch_Controller_Admin
         }
     }
         
-    function defaultPageHandler ($action)
+    function defaultPageHandler($action)
     {
-        $this->routeAction(SpatialMatch_Util_URL::getParameter('action'));
+        $this->routeAction($this->getCurrentAction());
     }
     
     function addPageHandler()
     {
-        $action = SpatialMatch_Util_URL::getParameter('action');
+        $action = $this->getCurrentAction();
         
-        $this->routeAction((isset($action) && (strlen($action) > 0)) ? $action : 'add');
+        $this->routeAction(!empty($action) ? $action : 'add');
     }    
 
     function licenseKeysPageHandler()
     {
-        $action = SpatialMatch_Util_URL::getParameter('action');
+        $action = $this->getCurrentAction();
         
-        $this->routeAction((isset($action) && (strlen($action) > 0)) ? $action : 'licenses');        
+        $this->routeAction(!empty($action) ? $action : 'licenses');        
     }
     
     function settingsPageHandler()
     {
-        $action = SpatialMatch_Util_URL::getParameter('action');
+        $action = $this->getCurrentAction();
         
-        $this->routeAction((isset($action) && (strlen($action) > 0)) ? $action : 'settings');
+        $this->routeAction(!empty($action) ? $action : 'settings');
     }
 
-    private function routeAction ($action)
+    private function routeAction($action)
     {
         $this->view = new stdClass();
         
@@ -267,27 +268,36 @@ class SpatialMatch_Controller_Admin
     
     private function deleteMap()
     {
-        $id = (int) SpatialMatch_Util_URL::getParameter('id');
-    
-        if (isset($id) && !is_nan($id) && ($id > 0))
+        $ids = (is_array($_REQUEST['id'])) ? $_REQUEST['id'] : array($_REQUEST['id']);
+
+        $count = 0;
+        
+        $errors = [];
+        
+        if (!empty($ids))
         {
-            $result = SpatialMatch_Manager_Map::delete($id);
-                
-            if ($result !== false)
+            foreach ($ids as $id)
             {
-                $this->view->message = 'The map has been deleted.';
-            }
-            else
-            {
-                array_push($this->view->errors, 'An unexpected error occurred while deleting the map.');  
+                if (isset($id) && !is_nan($id) && ($id > 0))
+                {
+                    if (SpatialMatch_Manager_Map::delete($id) !== false)
+                    {
+                        $count++;
+                    }
+                }
             }            
+
+            if ($count > 0)
+            {
+                $this->view->message = $count . (($count == 1) ? ' map has' : ' maps have') . ' been deleted.';
+            }
         }
         
         $this->showMapList();
     }
         
     private function updateMap()
-    {        
+    {
         $map = new SpatialMatch_Model_Map();
         
         $map->id = (int) SpatialMatch_Util_URL::getParameter('id');
@@ -338,9 +348,11 @@ class SpatialMatch_Controller_Admin
     }
 
     private function showMapList()
-    {        
-        $this->view->maps = SpatialMatch_Manager_Map::find();
-                        
+    {
+        $this->view->mapList = new SpatialMatch_UI_MapList();
+
+        $this->view->mapList->prepare_items();
+        
         require(SpatialMatch::$pluginDir . '/classes/view/admin-map-list.phtml');        
     }
     
@@ -415,5 +427,17 @@ class SpatialMatch_Controller_Admin
         $this->view->message = 'The license key has been removed.';
         
         $this->showLicenseKeys();
+    }
+    
+    private function getCurrentAction()
+    {
+        $action = SpatialMatch_Util_URL::getParameter('action');
+        
+        if (empty($action) || ($action == '-1'))
+        {
+            $action = SpatialMatch_Util_URL::getParameter('action2');            
+        }
+        
+        return $action;
     }
 }

@@ -6,9 +6,10 @@
     
     <?php require('common/messages.phtml') ?>
     
-    <form method='post'>
+    <form method='post' action='<?php echo admin_url('admin.php?page=' . SpatialMatch_Controller_Admin::MENU_ID) ?>'>
         
         <input type='hidden' name='action' value='update' />
+        <input type='hidden' name='id' value='<?php echo $this->view->map->id ?>' />
         
         <?php wp_nonce_field(); ?>
 

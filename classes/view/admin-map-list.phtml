@@ -3,84 +3,25 @@
     <div class='mapicon icon32'><br/></div>
 
     <h2 style='padding-bottom:10px'>
-        Maps <a href='?page=<?php echo SpatialMatch_Controller_Admin::MENU_ID ?>-add' class='button add-new-h2'>Add New</a>
+        Maps <a href='?page=<?php echo SpatialMatch_Controller_Admin::MENU_ID ?>-add' class='add-new-h2'>Add New Map</a>
     </h2>
 
     <?php require('common/messages.phtml') ?>
 
     <p />
 
-    <form name='spatialmatch-maps-form' class='form-fields item-list-form' method='post'>
+    <form name='spatialmatch-maps-form' class='form-fields item-list-form' method='get'>
 
-        <table class='wp-list-table widefat fixed' cellspacing='0'>
+        <input type='hidden' name='page' value='<?php echo SpatialMatch_Controller_Admin::MENU_ID ?>' />
+<?php        
+        $this->view->mapList->search_box('Search', 'x'); 
 
-            <thead>
-                <tr>
-                    <th class='manage-column' style='width:50px'>ID</th>
-                    <th class='manage-column' style='width:300px'>Title</th>
-                    <th class='manage-column'>Description</th>
-                    <th class='manage-column' style='width:200px'>Short Code</th>
-                </tr>
-            </thead>
-            
-            <tbody>
-<?php
-                if (count($this->view->maps) > 0)
-                {
-                    $alternate = true;
-                    
-                    foreach ($this->view->maps as $map)
-                    {
-?>                        
-                        <tr <?php if ($alternate) echo ' class="alternate"'; ?>>
-                            
-                            <td>
-                                <?php echo $map->id ?>
-                            </td>
-                            
-                            <td>
-                                <a class='row-title' href='?page=<?php echo SpatialMatch_Controller_Admin::MENU_ID ?>&action=edit&id=<?php echo $map->id; ?>'
-                                    title='Edit &quot;<?php echo esc_html($map->title); ?>&quot;'><?php echo esc_html($map->title); ?></a>
-                                    
-                                <div class='row-actions'>
-                                    <span class='edit'>
-                                        <a href='?page=<?php echo SpatialMatch_Controller_Admin::MENU_ID ?>&action=edit&id=<?php echo $map->id; ?>'
-                                            title='Edit &quot;<?php echo esc_html($map->title) ?>&quot;'>Edit</a>
-                                    </span> |
-                                    <span class='trash'>
-                                        <a href='?page=<?php echo SpatialMatch_Controller_Admin::MENU_ID ?>&action=delete&id=<?php echo $map->id; ?>'                                        
-                                            title='Delete &quot;<?php echo esc_html($map->title) ?>&quot;'
-                                            onclick="return confirm('Are you sure you want to delete the map &quot;<?php echo esc_js($map->title) ?>&quot;?');">Delete</a>
-                                    </span>                                    
-                                </div>
-                                
-                            </td>
-                            
-                            <td><?php echo esc_html($map->description) ?></td>
-                            
-                            <td>
-                                <input type='text' style='width:100%;' readonly='true' onclick='this.select()' onfocus='this.select()' 
-                                    value='[<?php echo SpatialMatch_Controller_Shortcode::MAP_SHORTCODE ?> id=<?php echo $map->id; ?>]' />
-                            </td>
-                            
-                        </tr>
-<?php
-                        $alternate = !$alternate;
-                    }
-                }
-                else
-                {
-?>                    
-                    <tr>
-                        <td colspan='4'>You have not created any maps.  <a href='?page=<?php echo SpatialMatch_Controller_Admin::MENU_ID ?>-add'>Add one now!</a>
-                    </tr>
-<?php
-                }
-?>                                    
-            </tbody>
-
-        </table>
-
+        $this->view->mapList->display();
+?>
     </form>
+
+    <h2 style='padding-bottom:10px'>
+        <a href='?page=<?php echo SpatialMatch_Controller_Admin::MENU_ID ?>-add' class='button-primary'>Add New Map</a>
+    </h2>
 
 </div>
