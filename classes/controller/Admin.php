@@ -29,36 +29,36 @@ class SpatialMatch_Controller_Admin
     
     function doAdminMenu()
     {
-        add_menu_page(SpatialMatch::PLUGIN_NAME,
-                      SpatialMatch::PLUGIN_NAME . '&reg;',
+        add_menu_page('SpatialMatch',
+                      'SpatialMatch&reg;',
                       'administrator', 
                       self::MENU_ID,
                       array(&$this, 'defaultPageHandler'),
                       esc_url(SpatialMatch::$pluginURL . '/images/admin-menu.png'));
         
         add_submenu_page(self::MENU_ID,
-                         SpatialMatch::PLUGIN_NAME . ' | Maps',
+                         'SpatialMatch | Maps',
                          'All Maps',
                          'administrator',
                          self::MENU_ID,
                          array(&$this, 'defaultPageHandler'));            
 
         add_submenu_page(self::MENU_ID,
-                         SpatialMatch::PLUGIN_NAME . ' | Add New Map',
+                         'SpatialMatch | Add New Map',
                          'Add New Map',
                          'administrator',
                          self::MENU_ID . '-add',
                          array(&$this, 'addPageHandler'));            
 
         add_submenu_page(self::MENU_ID,
-                         SpatialMatch::PLUGIN_NAME . ' | License Keys',
+                         'SpatialMatch | License Keys',
                          'License Keys',
                          'administrator',
                          self::MENU_ID . '-licenses',
                          array(&$this, 'licenseKeysPageHandler'));            
 
         add_submenu_page(self::MENU_ID,
-                         SpatialMatch::PLUGIN_NAME . ' | Settings',
+                         'SpatialMatch | Settings',
                          'Settings',
                          'administrator',
                          self::MENU_ID . '-settings',

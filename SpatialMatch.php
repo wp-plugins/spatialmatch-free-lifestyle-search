@@ -10,14 +10,14 @@
 
 class SpatialMatch
 {
-    const PLUGIN_NAME = 'SpatialMatch';
-    
     public static $pluginName;
     public static $pluginDir;
     public static $pluginURL;
    
     function __construct()
     {
+        SpatialMatch::$pluginName = basename(dirname(__FILE__));
+
         // Hooks
             
         add_action('init', array(&$this, 'doInit'));
@@ -25,8 +25,8 @@ class SpatialMatch
         
         // Compute paths
                 
-        SpatialMatch::$pluginDir = WP_PLUGIN_DIR . '/' . self::PLUGIN_NAME;
-        SpatialMatch::$pluginURL = WP_PLUGIN_URL . '/' . self::PLUGIN_NAME;
+        SpatialMatch::$pluginDir = WP_PLUGIN_DIR . '/' . self::$pluginName;
+        SpatialMatch::$pluginURL = WP_PLUGIN_URL . '/' . self::$pluginName;
         
         // Includes
         

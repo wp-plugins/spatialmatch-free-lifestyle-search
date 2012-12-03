@@ -76,7 +76,7 @@ class SpatialMatch_Controller_Shortcode
     {
         $wpdir = dirname(WP_CONTENT_DIR);
                    
-        $url = SpatialMatch::PLUGIN_NAME . '/classes/view/shortcode-editor-popup.php?width=640&height=601&wp=' . esc_html($wpdir) . '&TB_iframe=1';
+        $url = SpatialMatch::$pluginName . '/classes/view/shortcode-editor-popup.php?width=640&height=601&wp=' . esc_html($wpdir) . '&TB_iframe=1';
         
         $content .= '<a href="#" onclick=\'tb_show("Add SpatialMatch&reg; Map", "' . plugins_url($url) . '");return false\'>' . 
             '<img alt="Add SpatialMatch&reg; Map" ' . 'src="' . SpatialMatch::$pluginURL . '/images/media-button.png" /></a>';
