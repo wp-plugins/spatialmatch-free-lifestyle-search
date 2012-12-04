@@ -25,13 +25,19 @@ Compete with the Big Portals! Capture leads with unlimited search maps using 100
 
 == Installation ==
 
-* Upload the entire <code>SpatialMatch</code> folder to your Wordpress <code>/wp-content/plugins/</code> directory.
+* Go to your WordPress admin &quot;Dashboard&quot; area and select the *Plugins* item from the left side menu.  Click on the *Add New* button near the top of the page  (next to the page title *Plugins*).
 
-* Activate the plugin through the 'Plugins' menu in WordPress.
+* If you haven’t already downloaded the plugin from the wordpress.org site, search for &quot;spatialmatch&quot; in the *Search Plugins* box.  Otherwise click the *Upload* link and locate the *SpatialMatch.zip* plugin file in that you previously saved to your computer.
 
-* Go to the SpatialMatch&reg; 'License Keys' menu to configure your license key.
+* Click the *Install Now* link to begin installing the plugin.
 
-* Create some maps via the SpatialMatch&reg; 'Add New Map' link.
+* Once the plugin has been installed, click the *Activate Plugin* link.
+
+* Click the *SpatialMatch&reg; &gt; License Keys* menu item on the left side of the WordPress Dashboard.
+
+* If you already have a SpatialMatch license key, click the *Add License Key* button to add it.  If you don't already have a SpatialMatch license key, you can request your FREE license key <a href="http://http://www.freelifestylesearch.com/">here</a>.
+
+* Once you have specified your license key you can create some maps via the *SpatialMatch&reg; &gt; Add New Map* link on the left side of the WordPress Dashboard.
 
 * Drop a SpatialMatch&reg; Map Widget in one of your theme's widget areas or use the shortcode API to embed a map in your page content.
 
