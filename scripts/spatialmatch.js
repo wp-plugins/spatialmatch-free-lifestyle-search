@@ -441,8 +441,6 @@ SpatialMatch.PropertySearch =
             }
             else if (field.type == 'range')
             {
-                console.log(field);
-                
                 var valueId = 'x-' + SpatialMatch.Util.uid();
         
                 obj.before('<label id="' + valueId + '" class="spatialmatch-widget-search-field-range-value"></label><br style="clear:both" />');
