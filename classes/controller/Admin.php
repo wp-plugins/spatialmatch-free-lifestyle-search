@@ -272,7 +272,7 @@ class SpatialMatch_Controller_Admin
 
         $count = 0;
         
-        $errors = [];
+        $errors = array();
         
         if (!empty($ids))
         {
