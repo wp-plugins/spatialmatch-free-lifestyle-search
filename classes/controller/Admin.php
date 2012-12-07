@@ -272,8 +272,6 @@ class SpatialMatch_Controller_Admin
 
         $count = 0;
         
-        $errors = [];
-        
         if (!empty($ids))
         {
             foreach ($ids as $id)
