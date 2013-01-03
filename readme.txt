@@ -1,6 +1,6 @@
 === SpatialMatch Lifestyle Search ===
 Tags: IDX, MLS, Multiple Listing Service, Real Estate, Wordpress IDX, search, map, lifestyle, neighborhood, schools, demographics, homes, data
-Stable Tag: 2.5
+Stable Tag: 2.5.1
 Requires at least: 3.3
 Tested up to: 3.4
 Contributors: homejunction
@@ -27,7 +27,7 @@ Compete with the Big Portals! Capture leads with unlimited search maps using 100
 
 * Go to your WordPress admin &quot;Dashboard&quot; area and select the *Plugins* item from the left side menu.  Click on the *Add New* button near the top of the page  (next to the page title *Plugins*).
 
-* If you haven’t already downloaded the plugin from the wordpress.org site, search for &quot;spatialmatch&quot; in the *Search Plugins* box.  Otherwise click the *Upload* link and locate the *SpatialMatch.zip* plugin file in that you previously saved to your computer.
+* If you haven't already downloaded the plugin from the wordpress.org site, search for &quot;spatialmatch&quot; in the *Search Plugins* box.  Otherwise click the *Upload* link and locate the *SpatialMatch.zip* plugin file in that you previously saved to your computer.
 
 * Click the *Install Now* link to begin installing the plugin.
 
@@ -35,7 +35,7 @@ Compete with the Big Portals! Capture leads with unlimited search maps using 100
 
 * Click the *SpatialMatch&reg; &gt; License Keys* menu item on the left side of the WordPress Dashboard.
 
-* If you already have a SpatialMatch license key, click the *Add License Key* button to add it.  If you don't already have a SpatialMatch license key, you can request your FREE license key <a href="http://http://www.freelifestylesearch.com/">here</a>.
+* If you already have a SpatialMatch license key, click the *Add License Key* button to add it.  If you don't already have a SpatialMatch license key, you can request your FREE license key <a href="http://www.freelifestylesearch.com/">here</a>.
 
 * Once you have specified your license key you can create some maps via the *SpatialMatch&reg; &gt; Add New Map* link on the left side of the WordPress Dashboard.
 
