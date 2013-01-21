@@ -65,20 +65,21 @@ class SpatialMatch
         SpatialMatch_Manager_Settings::initialize();
                 
         // Enqueue scripts
-        
-        wp_enqueue_script('jquery-ui-core');
-        
-        wp_enqueue_script('jquery-ui-dialog');
-        
-        wp_enqueue_script('jquery-ui-slider', SpatialMatch::$pluginURL . '/third-party/jquery/js/jquery.ui.slider.js',
-                          array('jquery-ui-core', 'jquery-ui-widget', 'jquery-ui-mouse'));
-        
-        wp_enqueue_script('spatialmatch', SpatialMatch::$pluginURL . '/scripts/spatialmatch.js',
-                          array('jquery-ui-slider', 'jquery-ui-dialog', 'jquery', 'swfobject'));
 
-        // Enqueue Styles
-
-        wp_enqueue_style('spatialmatch-jquery-ui', SpatialMatch::$pluginURL . '/third-party/jquery/css/jquery-ui-custom.css');
+        $deps = array('jquery', 'swfobject');
+        
+        if (!is_admin())
+        {
+            wp_enqueue_script('jquery-ui-core');        
+            wp_enqueue_script('jquery-ui-dialog');        
+            wp_enqueue_script('jquery-ui-slider');
+            
+            wp_enqueue_style('spatialmatch-jquery-ui', SpatialMatch::$pluginURL . '/third-party/jquery/css/jquery-ui-custom.css');
+            
+            array_push($deps, 'jquery-ui-core', 'jquery-ui-dialog', 'jquery-ui-slider');            
+        }
+        
+        wp_enqueue_script('spatialmatch', SpatialMatch::$pluginURL . '/scripts/spatialmatch.js', $deps);
         
         wp_enqueue_style('spatialmatch', SpatialMatch::$pluginURL . '/css/spatialmatch.css');
     }
