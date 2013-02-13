@@ -26,69 +26,69 @@ class SpatialMatch_Widget_PropertySearch extends WP_Widget
         {
             self::$FIELDS = array
             (
-                array(key   => 'location',
-                      label => 'Location',
-                      types => array('*')
+                array('key'   => 'location',
+                      'label' => 'Location',
+                      'types' => array('*')
                 ),
                     
-                array(key   => 'beds',
-                      label => 'Bedrooms',
-                      types => array(self::LISTING_TYPE_RESIDENTIAL,
+                array('key'   => 'beds',
+                      'label' => 'Bedrooms',
+                      'types' => array(self::LISTING_TYPE_RESIDENTIAL,
                                      self::LISTING_TYPE_RENTALS,
                                      self::LISTING_TYPE_FARMS)
                 ),
                     
-                array(key   => 'baths',
-                      label => 'Baths',
-                      types => array(self::LISTING_TYPE_RESIDENTIAL,
+                array('key'   => 'baths',
+                      'label' => 'Baths',
+                      'types' => array(self::LISTING_TYPE_RESIDENTIAL,
                                      self::LISTING_TYPE_RENTALS,
                                      self::LISTING_TYPE_FARMS)
                 ),
                 
-                array(key   => 'listingPrice',
-                      label => 'Price',
-                      types => array(self::LISTING_TYPE_RESIDENTIAL,
+                array('key'   => 'listingPrice',
+                      'label' => 'Price',
+                      'types' => array(self::LISTING_TYPE_RESIDENTIAL,
                                      self::LISTING_TYPE_MULTIFAMILY,
                                      self::LISTING_TYPE_FARMS)
                 ),
 
-                array(key   => 'leasePrice',
-                      label => 'Price',
-                      types => array(self::LISTING_TYPE_RENTALS)
+                array('key'   => 'leasePrice',
+                      'label' => 'Price',
+                      'types' => array(self::LISTING_TYPE_RENTALS)
                 ),
 
-                array(key   => 'landPrice',
-                      label => 'Price',
-                      types => array(self::LISTING_TYPE_LAND)
+                array('key'   => 'landPrice',
+                      'label' => 'Price',
+                      'types' => array(self::LISTING_TYPE_LAND)
                 ),
 
-                array(key   => 'homeSize',
-                      label => 'Home Size',
-                      types => array(self::LISTING_TYPE_RESIDENTIAL,
+                array('key'   => 'homeSize',
+                      'label' => 'Home Size',
+                      'types' => array(self::LISTING_TYPE_RESIDENTIAL,
                                      self::LISTING_TYPE_FARMS)
                 ),
 
-                array(key   => 'lotSize',
-                      label => 'Lot Size',
-                      types => array('*')
+                array('key'   => 'lotSize',
+                      'label' => 'Lot Size',
+                      'types' => array('*')
                 ),
 
-                array(key   => 'yearBuilt',
-                      label => 'Year Built',
-                      types => array(self::LISTING_TYPE_RESIDENTIAL,
+                array('key'   => 'yearBuilt',
+                      'label' => 'Year Built',
+                      'types' => array(self::LISTING_TYPE_RESIDENTIAL,
                                      self::LISTING_TYPE_MULTIFAMILY,
                                      self::LISTING_TYPE_RENTALS,
                                      self::LISTING_TYPE_FARMS)
                 ),
 
-                array(key   => 'numUnits',
-                      label => 'Number of Units',
-                      types => array(self::LISTING_TYPE_MULTIFAMILY)
+                array('key'   => 'numUnits',
+                      'label' => 'Number of Units',
+                      'types' => array(self::LISTING_TYPE_MULTIFAMILY)
                 ),
 
-                array(key   => 'keywords',
-                      label => 'Keywords',
-                      types => array('*')
+                array('key'   => 'keywords',
+                      'label' => 'Keywords',
+                      'types' => array('*')
                 )
             );
         }                
