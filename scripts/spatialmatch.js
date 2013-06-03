@@ -116,7 +116,7 @@ SpatialMatch.Map =
         height = (height != null) ? height : jQuery(window).height() - 50;
         
         var div = jQuery('#' + id);
-        
+
         if (div != null)
         {
             div.dialog(
@@ -128,7 +128,12 @@ SpatialMatch.Map =
                 
                 create: function ()
                 {
-                    SpatialMatch.Map.embed(config);
+                    var mapId = SpatialMatch.Map.embed(config);
+                    
+                    SpatialMatch.Event.addListener(mapId, 'keyboardEscape', function ()
+                    {
+                        div.dialog('close');
+                    });
                 }
             });
         }
