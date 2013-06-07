@@ -58,16 +58,16 @@ Answers to frequently asked questions can be found <a href="http://www.spatialma
 
 **2.5.5**
 
-Added ability to popup a map from a bookmark.
-Added help page.
+* Added ability to popup a map from a bookmark.
+* Added help page.
 
 **2.5.4**
 
-Added support to allow the ESCAPE key to close the popup map window.
+* Added support to allow the ESCAPE key to close the popup map window.
 
 **2.5.3**
 
-Fixed PHP warnings
+* Fixed PHP warnings
 
 **2.5.2**
 
