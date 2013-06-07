@@ -203,24 +203,24 @@ class SpatialMatch_Manager_Map
         
         $config = '{ licenseKey:\'' . $licenseKey . '\',bookmark:\'' . $bookmark . '\',width:\'100%\',height:\'100%\',renderTo:\'' . $uid . '-map-wrapper\'}';
         
-        $js = 'SpatialMatch.Map.popup(\'' . $uid . '\',' . $width . ',' . $height . ',' . $config . ');return false';
 
-        $html = '<span class="spatialmatch-popup-wrapper">';
-                
+        $html = '<span class="spatialmatch-popup-wrapper"><a href="#" class="spatialmatch-popup-link" onclick="' .
+            'SpatialMatch.Map.popup(\'' . $uid . '\',' . $width . ',' . $height . ',' . $config . ');return false' . '">';
+        
         if ($appearance == 'button')
         {
-            $html .= '<input class="spatialmatch-popup-button button" type="button" value="' . esc_html($text) . '" onclick="' . $js . '" />';
+            $html .= '<input class="spatialmatch-popup-button button" type="button" value="' . esc_html($text) . '" />';
         }
         else if ($appearance == 'image')
         {
-            $html .= '<img src="' . esc_html($text) . '" class="spatialmatch-popup-image" onclick="' . $js . '" />';            
+            $html .= '<img src="' . esc_html($text) . '" class="spatialmatch-popup-image" />';            
         }
         else
         {
-            $html .= '<a href="#" class="spatialmatch-popup-link" onclick="' . $js . '">' . esc_html($text) . '</a>';            
+            $html .= esc_html($text);
         }
         
-        $html .= '</span>';
+        $html .= '</a></span>';
         
         // This stuff needs written in the footer
         

@@ -1,4 +1,4 @@
-.keyicon.icon32
+.helpicon.icon32
 {
     background-image: url('../images/icons-32.png');
     background-repeat: no-repeat;
@@ -64,4 +64,64 @@ TABLE.wp-list-table.maps TH.column-id
 TABLE.wp-list-table.maps TH.column-shortcode
 {
     width: 200px;
+}
+
+.spatialmatch-help ADDRESS
+{
+    letter-spacing: 0.5px;
+    line-height: 20px;
+    padding-top: 10px;
+    font-style: normal;
+}
+
+.spatialmatch-help UL
+{
+    margin: 20px 0px 30px 30px;
+}
+
+.spatialmatch-help LI
+{
+    background: url("../images/help.png") no-repeat scroll 0 0 transparent;
+    color: #505050;
+    height: 20px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    padding-left: 30px;
+}
+
+.spatialmatch-help .sm-icon-2
+{
+    background-position: 0px -20px;
+}
+
+.spatialmatch-help .sm-icon-3
+{
+    background-position: 0px -40px;
+}
+
+.spatialmatch-help .sm-icon-4
+{
+    background-position: 0px -60px;
+}
+
+.spatialmatch-help .sm-icon-5
+{
+    background-position: 0px -80px;
+}
+
+.spatialmatch-help .sm-icon-6
+{
+    background-position: 0px -100px;
+}
+
+.spatialmatch-help P
+{
+    max-width: 650px;
+    line-height: 1.6em;
+}
+
+SPAN.sm-reg
+{
+    font-size: x-small;
+    vertical-align: super;
 }

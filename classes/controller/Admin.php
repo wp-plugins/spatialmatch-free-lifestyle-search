@@ -64,6 +64,13 @@ class SpatialMatch_Controller_Admin
                          'administrator',
                          self::MENU_ID . '-settings',
                          array(&$this, 'settingsPageHandler'));            
+
+        add_submenu_page(self::MENU_ID,
+                         'SpatialMatch | Help',
+                         'Help',
+                         'administrator',
+                         self::MENU_ID . '-help',
+                         array(&$this, 'helpPageHandler'));            
     }
     
     function doAdminNotices()
@@ -114,6 +121,13 @@ class SpatialMatch_Controller_Admin
         $this->routeAction(!empty($action) ? $action : 'settings');
     }
 
+    function helpPageHandler()
+    {
+        $action = $this->getCurrentAction();
+        
+        $this->routeAction(!empty($action) ? $action : 'help');
+    }
+
     private function routeAction($action)
     {
         $this->view = new stdClass();
@@ -147,6 +161,10 @@ class SpatialMatch_Controller_Admin
         else if ($action == 'settings')
         {
             $this->showSettings();
+        }
+        else if ($action == 'help')
+        {
+            $this->showHelp();
         }
         else if ($action == 'add-license')
         {
@@ -374,6 +392,13 @@ class SpatialMatch_Controller_Admin
         require(SpatialMatch::$pluginDir . '/classes/view/admin-settings.phtml');
     }
     
+    private function showHelp()
+    {
+        $this->view->licenseKeys = SpatialMatch_Manager_LicenseKeys::getLicenseKeys();
+
+        require(SpatialMatch::$pluginDir . '/classes/view/admin-help.phtml');        
+    }
+
     private function addLicenseKey()
     {
         $this->view->licenseKey = '';

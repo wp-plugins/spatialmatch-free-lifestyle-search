@@ -92,12 +92,12 @@ SpatialMatch.Map =
             document.write('</div>');
         }
         
-        swfobject.embedSWF('http://app.spatialmatch.com/SpatialMatch.swf',
+        swfobject.embedSWF('http://local.spatialmatch.com/SpatialMatch.swf',
                            renderTo,
                            width,
                            height,
                            '9.0.45',
-                           'http://app.spatialmatch.com/third-party/swfobject/expressInstall.swf',
+                           'http://local.spatialmatch.com/third-party/swfobject/expressInstall.swf',
                            flashvars, 
                            parameters,
                            attributes);
@@ -111,7 +111,7 @@ SpatialMatch.Map =
     },
     
     popup: function (id, width, height, config)
-    {
+    {        
         width = (width != null) ? width : jQuery(window).width() - 50;
         height = (height != null) ? height : jQuery(window).height() - 50;
         
@@ -128,6 +128,10 @@ SpatialMatch.Map =
                 
                 create: function ()
                 {
+                    config['sm.popup'] = true;
+                    
+                    console.log(config);
+                    
                     var mapId = SpatialMatch.Map.embed(config);
                     
                     SpatialMatch.Event.addListener(mapId, 'keyboardEscape', function ()
@@ -150,7 +154,18 @@ SpatialMatch.Util =
         }
     
         return SpatialMatch.Util.__uid++;
-    }
+    },
+    
+    getParameter: function (name)
+    {
+        name = name.replace(/[\[]/, '\\\[').replace(/[\]]/, '\\\]');
+            
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+
+        var results = regex.exec(window.location.search);
+            
+        return (results) ? decodeURIComponent(results[1].replace(/\+/g, ' ')) : null;
+    }            
 }
 
 SpatialMatch.String = 
@@ -202,6 +217,28 @@ SpatialMatch.String =
         }
                         
         return s;        
+    },
+    
+    toBoolean: function (value)
+    {
+        if ((value === true) || (value === false))
+        {
+            return value;
+        }
+        
+        if ((value == 'true') || (value == 'yes') || (value == 'on'))
+        {
+            return true;
+        }
+
+        var iVal = parseInt(value);
+        
+        if ((iVal != 0) && !isNaN(iVal))
+        {
+            return true;
+        }
+        
+        return false;
     }
 }
 
@@ -1038,6 +1075,21 @@ jQuery(document).ready(function()
         s.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
 
         fb.appendChild(s);        
+    }
+    
+    var popup = SpatialMatch.Util.getParameter('sm.popup');
+    
+    if ((popup != null) && (popup.length > 0))
+    {
+        if (SpatialMatch.String.toBoolean(popup) == true)
+        {
+            var links = jQuery('.spatialmatch-popup-wrapper A');
+            
+            if (links.length > 0)
+            {
+                links[0].click();
+            }
+        }
     }
 });
 
