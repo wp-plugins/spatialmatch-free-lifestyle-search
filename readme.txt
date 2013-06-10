@@ -56,6 +56,10 @@ Answers to frequently asked questions can be found <a href="http://www.spatialma
 
 == Changelog ==
 
+**2.5.6**
+
+* Fixed invalid path inadvertently added in version 2.5.5.
+
 **2.5.5**
 
 * Added ability to popup a map from a bookmark.
