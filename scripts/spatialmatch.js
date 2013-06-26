@@ -130,8 +130,6 @@ SpatialMatch.Map =
                 {
                     config['sm.popup'] = true;
                     
-                    console.log(config);
-                    
                     var mapId = SpatialMatch.Map.embed(config);
                     
                     SpatialMatch.Event.addListener(mapId, 'keyboardEscape', function ()
