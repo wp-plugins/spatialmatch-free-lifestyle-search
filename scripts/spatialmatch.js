@@ -125,6 +125,7 @@ SpatialMatch.Map =
                 height: height,
                 modal: true,
                 resizable: false,
+                closeOnEscape: false,
                 
                 create: function ()
                 {
