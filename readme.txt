@@ -1,25 +1,25 @@
 === SpatialMatch Lifestyle Search ===
 Tags: IDX, MLS, Multiple Listing Service, Real Estate, Wordpress IDX, search, map, lifestyle, neighborhood, schools, demographics, homes, data
-Stable Tag: 2.5.7
+Stable Tag: 2.5.8
 Requires at least: 3.3
-Tested up to: 3.5.2
+Tested up to: 3.6
 Contributors: homejunction
 
 Compete with the Big Portals! Capture leads with unlimited search maps using 100 integrated databases. Real-time interactive interface. Excellent SEO.
 
 == Description ==
 
-* SpatialMatch&reg; FREE Lifestyle Search is a revolutionary lifestyle real estate search engine plugin for real estate professionals focusing on the broader lifestyle needs of a potential homeowner.  
+* SpatialMatch&reg; FREE Lifestyle Search is a revolutionary lifestyle real estate search engine plugin for real estate professionals focusing on the broader lifestyle needs of a potential homeowner.
 
-* SpatialMatch&reg; FREE Lifestyle Search enables the dream by allowing consumers to search for the particular area(s) that best match the hyper-local factors that impact the style and quality of life (i.e. the consumer &quot;lifestyle&quot;).  
+* SpatialMatch&reg; FREE Lifestyle Search enables the dream by allowing consumers to search for the particular area(s) that best match the hyper-local factors that impact the style and quality of life (i.e. the consumer &quot;lifestyle&quot;).
 
 * Consumers can search for neighborhoods or communities based upon any combination of parameters relating to demographics, education, points of interest, neighborhoods, and more (i.e. looking for the micro communities in a particular area that are in close proximity to the right high school, favorite coffee shop, place of worship and grocery store(s) is critical to today's real estate consumer).
 
-* SpatialMatch&reg; FREE Lifestyle Search plugin instantly improves your websites competitiveness.  It delivers a fun, interactive map-based user experience that displays all their selected lifestyle factors.  
+* SpatialMatch&reg; FREE Lifestyle Search plugin instantly improves your websites competitiveness.  It delivers a fun, interactive map-based user experience that displays all their selected lifestyle factors.
 
 * Build and manage unlimited maps to be used in pages and posts.
-  
-* Also included are great sidebar, header and footer widgets for creating a quick search option, popup map buttons and more.  For instance, you regularly blog about the monthly sold homes in specific neighborhoods...now you can create a map, draw or select the area and turn on "recently sold" and you have a wonderful visual aid to drop into your posts.  
+
+* Also included are great sidebar, header and footer widgets for creating a quick search option, popup map buttons and more.  For instance, you regularly blog about the monthly sold homes in specific neighborhoods...now you can create a map, draw or select the area and turn on "recently sold" and you have a wonderful visual aid to drop into your posts.
 
 * **Also available with integrated IDX listings.**
 
@@ -55,6 +55,10 @@ Answers to frequently asked questions can be found <a href="http://www.spatialma
 4. SpatialMatch&reg; Lifestyle Search widget settings
 
 == Changelog ==
+
+**2.5.8***
+
+* Fixed layout issue on Chrome.
 
 **2.5.7**
 

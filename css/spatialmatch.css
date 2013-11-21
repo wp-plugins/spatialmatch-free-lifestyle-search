@@ -21,7 +21,7 @@ IMG.spatialmatch-popup-image
 .spatialmatch-shortcode-editor .header
 {
     background-color: #F9F9F9;
-    border-bottom-color: #DFDFDF;    
+    border-bottom-color: #DFDFDF;
     border-bottom-style: solid;
     border-bottom-width: 1px;
     padding-left: 20px;
@@ -107,7 +107,7 @@ IMG.spatialmatch-popup-image
 
 .spatialmatch-shortcode-editor .button-box INPUT
 {
-    width: 70px;    
+    width: 70px;
 }
 
 .spatialmatch-shortcode-editor DIV.warning
@@ -132,9 +132,19 @@ IMG.spatialmatch-popup-image
     width: 100%;
 }
 
+.spatialmatch-widget-search .spatialmatch-widget-search-field-label
+{
+    float: left;
+}
+
 .spatialmatch-widget-search .spatialmatch-widget-search-field-range-value
 {
     float: right;
+}
+
+.spatialmatch-widget-search .spatialmatch-widget-search-field
+{
+    clear: both;
 }
 
 .spatialmatch-widget-search INPUT.button
