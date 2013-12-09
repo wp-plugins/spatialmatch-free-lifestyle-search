@@ -132,17 +132,17 @@ IMG.spatialmatch-popup-image
     width: 100%;
 }
 
-.spatialmatch-widget-search .spatialmatch-widget-search-field-label
+.spatialmatch-widget-property-search .spatialmatch-widget-search-field-label
 {
     float: left;
 }
 
-.spatialmatch-widget-search .spatialmatch-widget-search-field-range-value
+.spatialmatch-widget-property-search .spatialmatch-widget-search-field-range-value
 {
     float: right;
 }
 
-.spatialmatch-widget-search .spatialmatch-widget-search-field
+.spatialmatch-widget-property-search .spatialmatch-widget-search-field
 {
     clear: both;
 }

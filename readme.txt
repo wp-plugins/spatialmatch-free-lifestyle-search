@@ -1,6 +1,6 @@
 === SpatialMatch Lifestyle Search ===
 Tags: IDX, MLS, Multiple Listing Service, Real Estate, Wordpress IDX, search, map, lifestyle, neighborhood, schools, demographics, homes, data
-Stable Tag: 2.5.8
+Stable Tag: 2.5.9
 Requires at least: 3.3
 Tested up to: 3.6
 Contributors: homejunction
@@ -55,6 +55,10 @@ Answers to frequently asked questions can be found <a href="http://www.spatialma
 4. SpatialMatch&reg; Lifestyle Search widget settings
 
 == Changelog ==
+
+**2.5.9***
+
+* Fixed additional layout issues.   Added support for WordPress 3.7
 
 **2.5.8***
 
