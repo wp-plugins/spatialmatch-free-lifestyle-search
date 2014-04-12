@@ -1,9 +1,9 @@
 <?php
 
 /*
-    Plugin Name: SpatialMatch
+    Plugin Name: HJI SpatialMatch
     Description: WordPress plugin for SpatialMatch.
-    Version: 2.5.9
+    Version: 2.6
     Author URI: http://www.homejunction.com
     Author: Home Junction
 */

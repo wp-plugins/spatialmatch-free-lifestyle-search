@@ -182,3 +182,8 @@ IFRAME#spatialmatch-adwords-tracking
     display: none;
     visibility: hidden;
 }
+
+.spatialmatch_page_spatialmatch-admin-add #post-body-content
+{
+    margin-right: 0;
+}

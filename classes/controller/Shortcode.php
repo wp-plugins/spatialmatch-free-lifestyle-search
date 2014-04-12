@@ -12,10 +12,59 @@ class SpatialMatch_Controller_Shortcode
     {
         add_shortcode(self::MAP_SHORTCODE, array(&$this, 'mapShortcodeHandler'));
         add_shortcode(self::POPUP_SHORTCODE, array(&$this, 'popupShortcodeHandler'));
-        
-        add_filter('media_buttons_context', array(&$this, 'doMediaButtonsFilter'));
+
+        // Mimicking tinyMCE plugin to place a button
+        // on a tinyMCE editor panel
+
+        if (class_exists('\hji\membership\Membership'))
+        {
+            add_filter('hji_mce_buttons', array($this, 'registerMceButton'), 99);
+            add_filter('mce_external_plugins', array($this, 'registerMcePlugin'), 99);
+
+            foreach (array('post.php','post-new.php') as $hook)
+            {
+                add_action("admin_head-$hook", array($this, 'admin_head'));
+            }
+        }
+        else
+        {
+            add_filter('media_buttons_context', array(&$this, 'doMediaButtonsFilter'));
+        }
     }
-    
+
+    function registerMceButton($buttons)
+    {
+        array_push($buttons, "SpatialMatch");
+
+        return $buttons;
+    }
+
+
+    function registerMcePlugin($plugin_array)
+    {
+        $plugin_array['SpatialMatch'] = SpatialMatch::$pluginURL . '/scripts/tinymce.js';
+
+        return $plugin_array;
+    }
+
+
+    function admin_head()
+    {
+        $wpdir = dirname(WP_CONTENT_DIR);
+
+        $url = SpatialMatch::$pluginName . '/classes/view/shortcode-editor-popup.php?width=640&height=601&wp=' . esc_html($wpdir) . '&TB_iframe=1';
+        ?>
+        <!-- TinyMCE Shortcode Plugin -->
+        <script type='text/javascript'>
+            var SpatialMatchShortcodePopup = {
+                'url': '<?php echo plugins_url($url); ?>'
+            };
+        </script>
+        <!-- TinyMCE Shortcode Plugin -->
+    <?php
+    }
+
+
     function mapShortcodeHandler ($attrs, $content = null)
     {
         extract(shortcode_atts(array('id' => '0',

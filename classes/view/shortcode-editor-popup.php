@@ -304,7 +304,7 @@ function spatialmatch_output_shortcode_editor_body ($tab)
 ?>
             <div class='warning'>
                 You have not created any SpatialMatch&reg; maps. &nbsp;
-                <a href='admin.php?page=<?php echo SpatialMatch_Controller_Admin::MENU_ID ?>-add'>Add one now!</a>
+                <a href='<?php echo admin_url('admin.php?page=' . SpatialMatch_Controller_Admin::MENU_ID) ?>-add'>Add one now!</a>
             </div>
 <?php
         }
