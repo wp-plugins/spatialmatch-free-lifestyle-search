@@ -14,7 +14,7 @@ class SpatialMatch_Widget_Map extends WP_Widget
             'description' => 'Use this widget to display a SpatialMatch&reg; map in one of your widget areas.'
         );
 
-        parent::__construct(self::ID, 'SpatialMatch: Map', $options);
+        parent::__construct(self::ID, 'HJI SpatialMatch: Map', $options);
     }
     
     function form ($instance)

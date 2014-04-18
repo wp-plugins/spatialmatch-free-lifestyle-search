@@ -14,7 +14,7 @@ class SpatialMatch_Widget_Popup extends WP_Widget
             'description' => 'Use this widget to display a link or button that, when clicked, will popup a SpatialMatch&reg; map.'
         );
 
-        parent::__construct(self::ID, 'SpatialMatch: Popup', $options);
+        parent::__construct(self::ID, 'HJI SpatialMatch: Popup', $options);
     }
     
     function form ($instance)

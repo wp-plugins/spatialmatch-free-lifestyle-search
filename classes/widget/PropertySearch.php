@@ -98,7 +98,7 @@ class SpatialMatch_Widget_PropertySearch extends WP_Widget
             'description' => 'This widget creates a form that allows your users to search for for-sale property.'
         );
 
-        parent::__construct(self::ID, 'SpatialMatch: Property Search', $options);
+        parent::__construct(self::ID, 'HJI SpatialMatch: Property Search', $options);
     }
     
     function form ($instance)

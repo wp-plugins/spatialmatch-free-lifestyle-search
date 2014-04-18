@@ -13,7 +13,7 @@ class SpatialMatch_Widget_LifestyleSearch extends WP_Widget
             'description' => 'This widget allows your users to search the lifestyles in an area.'
         );
 
-        parent::__construct(self::ID, 'SpatialMatch: Lifestyle Search', $options);
+        parent::__construct(self::ID, 'HJI SpatialMatch: Lifestyle Search', $options);
     }
     
     function form ($instance)
