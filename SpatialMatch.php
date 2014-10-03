@@ -3,7 +3,7 @@
 /*
     Plugin Name: HJI SpatialMatch
     Description: WordPress plugin for SpatialMatch.
-    Version: 2.6.2
+    Version: 2.6.1
     Author URI: http://www.homejunction.com
     Author: Home Junction
 */
