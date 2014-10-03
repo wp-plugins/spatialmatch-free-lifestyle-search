@@ -32,7 +32,7 @@ class SpatialMatch_Controller_Admin
     {
         add_menu_page('SpatialMatch',
                       'SpatialMatch&reg;',
-                      'administrator',
+                      'edit_pages',
                       self::MENU_ID,
                       array(&$this, 'defaultPageHandler'),
                       esc_url(SpatialMatch::$pluginURL . '/images/admin-menu.png'));
@@ -40,35 +40,35 @@ class SpatialMatch_Controller_Admin
         add_submenu_page(self::MENU_ID,
                          'SpatialMatch | Maps',
                          'All Maps',
-                         'administrator',
+                         'edit_pages',
                          self::MENU_ID,
                          array(&$this, 'defaultPageHandler'));
 
         add_submenu_page(self::MENU_ID,
                          'SpatialMatch | Add New Map',
                          'Add New Map',
-                         'administrator',
+                         'edit_pages',
                          self::MENU_ID . '-add',
                          array(&$this, 'addPageHandler'));
 
         add_submenu_page(self::MENU_ID,
                          'SpatialMatch | License Keys',
                          'License Keys',
-                         'administrator',
+                         'edit_pages',
                          self::MENU_ID . '-licenses',
                          array(&$this, 'licenseKeysPageHandler'));
 
         add_submenu_page(self::MENU_ID,
                          'SpatialMatch | Settings',
                          'Settings',
-                         'administrator',
+                         'edit_pages',
                          self::MENU_ID . '-settings',
                          array(&$this, 'settingsPageHandler'));
 
         add_submenu_page(self::MENU_ID,
                          'SpatialMatch | Help',
                          'Help',
-                         'administrator',
+                         'edit_pages',
                          self::MENU_ID . '-help',
                          array(&$this, 'helpPageHandler'));
     }
