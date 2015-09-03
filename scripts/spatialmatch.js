@@ -92,12 +92,12 @@ SpatialMatch.Map =
             document.write('</div>');
         }
 
-        swfobject.embedSWF('http://app.spatialmatch.com/SpatialMatch.swf',
+        swfobject.embedSWF('//app.spatialmatch.com/SpatialMatch.swf',
                            renderTo,
                            width,
                            height,
                            '9.0.45',
-                           'http://app.spatialmatch.com/third-party/swfobject/expressInstall.swf',
+                           '//app.spatialmatch.com/third-party/swfobject/expressInstall.swf',
                            flashvars,
                            parameters,
                            attributes);
